@@ -1,0 +1,163 @@
+:root {
+    --cyan: #00f2ff;
+    --magenta: #ff00ea;
+    --dark: #020205;
+    --dark-blue: #0a1f44;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #020609;
+    /* Grille de fond statique */
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    text-transform: uppercase;
+    position: relative;
+}
+
+/* --- CONFIGURATION DU SVG DE FOND --- */
+.grid-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Ne bloque pas les clics sur les boutons */
+    z-index: 0;
+}
+
+.flux {
+    fill: none;
+    stroke-width: 2px;
+    /* Segment de 150px suivi d'un espace vide */
+    stroke-dasharray: 150 2000;
+    opacity: 0;
+}
+
+.h-line { 
+    stroke: var(--cyan); 
+    animation: flux-animation 8s linear infinite;
+}
+
+.v-line { 
+    stroke: var(--magenta); 
+    animation: flux-animation 12s linear infinite reverse; 
+}
+
+.d-line { 
+    stroke: #0a1f44; 
+    animation: flux-animation 15s linear infinite; 
+    opacity: 0.5;
+}
+
+@keyframes flux-animation {
+    0% { stroke-dashoffset: 2150; opacity: 0; }
+    15% { opacity: 0.8; }
+    85% { opacity: 0.8; }
+    100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+/* --- INTERFACE UTILISATEUR --- */
+a {
+    text-decoration: none;
+    color: #00f2ff;
+}
+
+.chargement {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.bienvenue {
+    font-family: 'Orbitron', sans-serif;
+    color: #00f2ff;
+    letter-spacing: 8px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.main-title {
+    font-family: 'Orbitron';
+    font-size: 48px;
+    text-align: center;
+    letter-spacing: 10px;
+    color: #eee;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.white { color: #ffffff; }
+
+.cyan {
+    color: #00f2ff;
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.6);
+}
+
+.description {
+    font-size: 18px;
+    color: #a3b1c2;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.bottom-line {
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00f2ff, transparent);
+    margin: 20px auto 0;
+}
+
+.itreDessus {
+    margin-top: 40px;
+}
+
+.menu-nav {
+    margin-top: 50px;
+}
+
+.menu-btn {
+    background: rgba(0, 242, 255, 0.05);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    padding: 15px 50px;
+    margin: 10px;
+    font-family: 'Orbitron';
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
+    transition: 0.3s;
+}
+
+.menu-btn:hover {
+    background: var(--cyan);
+    color: #000;
+    box-shadow: 0 0 30px var(--cyan);
+}
+
+/* Petit reflet sur le bouton au survol */
+.menu-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: 0.4s;
+}
+
+.menu-btn:hover::after {
+    left: 100%;
+}

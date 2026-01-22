@@ -1,0 +1,690 @@
+:root {
+    --neon-gold: #ffaa00;
+    --neon-glow: rgba(255, 170, 0, 0.4);
+    --dark-bg: #05070a;
+    /* Un noir plus profond pour faire ressortir l'or */
+    --text-gray: #a3b1c2;
+    --grid-color: rgba(255, 170, 0, 0.07);
+    /* Grille assortie à l'or */
+}
+
+body {
+    background-color: var(--dark-bg);
+    /* Grille plus subtile et colorée en accord avec le thème */
+    background-image:
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    background-size: 50px 50px;
+
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    /* Centrage horizontal */
+    min-height: 100vh;
+    font-family: 'Rajdhani', sans-serif;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Boutons pour revenir à la page d'accueil */
+.RevenirAccueil {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 2000;
+    background: #ffe11edb;
+    color: #fff;
+    border: none;
+    padding: 6px 8px;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Premier titre + Premier paragraphe */
+.section1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 10vh;
+    padding-bottom: 6vh;
+    width: 100%;
+}
+
+.container {
+    max-width: 800px;
+    padding: 40px;
+    z-index: 1;
+}
+
+/* Style du Chapitre */
+.chapitre {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-gold);
+    letter-spacing: 8px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* Titre Principal */
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    width: 100%;
+    margin-top: 25px;
+    font-size: 64px;
+    /* Vous pouvez ajuster la taille ici */
+    color: #a3b1c2;
+    line-height: 1.1;
+    /* Vous pouvez changer la couleur ici */
+    text-shadow: 0 0 50px var(--neon-glow),
+        0 0 50px rgb(162, 108, 0);
+}
+
+/* Ligne de séparation */
+.soulignagne {
+    width: 100%;
+    max-width: 600px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-gold), transparent);
+    margin: 30px auto;
+    box-shadow: 0 0 15px var(--neon-gold);
+    margin-bottom: 30px;
+}
+
+/* Texte de description */
+.description,
+.description2 {
+    font-size: 19px;
+    line-height: 1.8;
+    /* espace vertical entre les lignes de texte */
+    color: var(--text-gray);
+    font-weight: 300;
+    /* l’épaisseur du texte */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Deuxieme paragraphe */
+.description2 {
+    max-width: 700px;
+}
+
+.description,
+.description2>div {
+    margin-bottom: 30px;
+}
+
+/* Les trois points */
+.points {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.points span {
+    width: 8px;
+    height: 8px;
+    background-color: var(--neon-gold);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--neon-gold);
+    animation: pulse 2s infinite ease-in-out;
+}
+
+/* Animation de pulsation pour les points */
+.points span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.points span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.8);
+    }
+}
+
+svg {
+    max-width: 90%;
+    height: auto;
+}
+
+/* Les tranches de dizaines d'années */
+.controls {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+button {
+    padding: 15px 25px;
+    border-radius: 50px;
+    border: 4px solid #FFAA00;
+    background: #9C7A11;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #FFAA00;
+    transform: scale(1.1);
+    /* grossis un peu les boutons */
+}
+
+/* 5. Les étiquettes pays */
+
+/* Alignement des textes sous les pièces */
+.pays {
+    display: flex;
+    justify-content: space-around;
+    /* Aligne les textes proportionnellement */
+    margin-top: 15px;
+    padding: 0 20px;
+    gap: 10px;
+    /* Ajuste selon la largeur de ton SVG */
+}
+
+/* Style des étiquettes de pays */
+.label-text {
+    color: #FFAA00;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 19px;
+    text-transform: uppercase;
+    /* Transforme le texte en MAJUSCULES */
+    letter-spacing: 2px;
+    /* espace entre chaque lettre */
+    text-shadow: 2px 2px 0px #000;
+    /* ombre au texte */
+    width: 100px;
+    /* Largeur fixe pour aider l'alignement */
+}
+
+/* Container principal */
+.dashboard-container {
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+/* Configuration du SVG */
+#mario-market-svg {
+    overflow: visible;
+    /* Le contenu qui dépasse de l’élément reste visible */
+}
+
+.coin {
+    --target-lift: 0px;
+    transform-box: fill-box;
+    /* la boîte de référence utilisée pour les transformations */
+    transform-origin: bottom;
+    /* Transition pour que le changement de hauteur soit fluide */
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Animation de sautillement infini */
+@keyframes jumping {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(var(--target-lift));
+    }
+}
+
+/* Activé uniquement quand on a des données */
+.coin.active {
+    animation: jumping 1.2s infinite ease-in-out alternate;
+    cursor: help;
+    /* Change le curseur en point d'interrogation au survol */
+}
+
+#tooltip {
+    position: absolute;
+    /* Il suit les coordonnées e.pageX / Y */
+    display: none;
+    /* Caché par défaut */
+    pointer-events: none;
+    background-color: #ffaa00;
+    /* Fond orange vif pour être sûr de le voir */
+    color: #000000;
+    /* Texte noir pour le contraste */
+    padding: 10px 15px;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 14px;
+    z-index: 10000;
+    /* Très haut pour passer devant le SVG */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    min-width: 120px;
+    /* Force une largeur minimale */
+    text-align: center;
+}
+
+/* Labels sous les pièces */
+.pays {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.label-text {
+    flex: 1;
+    color: #FFAA00;
+    font-family: 'Arial Black', sans-serif;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.svg-container {
+    position: absolute;
+    /* Permet de le placer n'importe où sur la page */
+
+    /* AJUSTE CES VALEURS POUR LE PLACER */
+    top: 20%;
+    /* Distance depuis le haut (px ou %) */
+    left: 5%;
+    /* Distance depuis la gauche (px ou %) */
+
+    width: 300px;
+    /* Taille du SVG */
+    z-index: 1;
+    /* Pour qu'il soit derrière ou devant tes éléments */
+    transform: rotate(-15deg);
+    /* Inclinaison */
+    pointer-events: none;
+    /* Pour ne pas bloquer les clics sur les boutons en dessous */
+}
+
+.svg-container2 {
+    position: absolute;
+    /* Permet de le placer n'importe où sur la page */
+
+    /* AJUSTE CES VALEURS POUR LE PLACER */
+    top: 80%;
+    /* Distance depuis le haut (px ou %) */
+    right: 5%;
+    /* Distance depuis la gauche (px ou %) */
+
+    width: 280px;
+    /* Taille du SVG */
+    z-index: 1;
+    transform: rotate(15deg);
+    /* Inclinaison */
+    pointer-events: none;
+    /* Pour ne pas bloquer les clics sur les boutons en dessous */
+}
+
+.animation1 {
+    position: relative;
+    width: 300px;
+    /* Ajuste la taille selon ton besoin */
+    transform: rotate(-15deg);
+    margin-left: 20px;
+}
+
+.svg-gold {
+    width: 500px;
+    height: auto;
+    fill: none;
+    /* Très important : pas de remplissage */
+}
+
+/* Le tracé de fond qui montre la forme */
+.fond-forme {
+    stroke: rgba(215, 215, 215, 0.2);
+    /* Gris très transparent ou sombre */
+    stroke-width: 3;
+    /* définir l’épaisseur du contour (trait) d’un élément SVG */
+}
+
+/* Le serpent qui court par dessus */
+#ligne {
+    stroke: #c47ffdb8;
+    /* Couleur vive du serpent */
+    stroke-width: 8;
+    /* définir l’épaisseur du contour (trait) d’un élément SVG */
+    stroke-linecap: round;
+    /* Optionnel : rend les bouts du serpent arrondis */
+
+    /* Ajuste 300 (longueur serpent) et 2000 (vide) selon ton SVG */
+    stroke-dasharray: 300 2000;
+    animation: ligne 4s infinite linear;
+}
+
+@keyframes ligne {
+    0% {
+        stroke-dashoffset: 2300;
+        /* Somme de 300 + 2000 */
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* les deux paragraphes dans  */
+.descriptiondeuxblocks {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    line-height: 72.1;
+}
+
+/* --- ADAPTATION GRAPHIQUE AU THÈME GOLD --- */
+.graphDyna {
+    display: grid;
+    gap: 100px;
+    grid-template-areas:
+        "na eu"
+        "center center"
+        "jp other";
+    max-width: 800px;
+    margin: 60px auto;
+    position: relative;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Style des boîtes calqué sur tes conteneurs Gold */
+.box {
+    padding: 20px;
+    border: 2px solid #ffaa00;
+    /* Ta variable --neon-gold */
+    border-radius: 12px;
+    text-align: center;
+    background: rgba(5, 7, 10, 0.826);
+    /* Ton --dark-bg avec transparence */
+    color: #a3b1c2;
+    /* Ton --text-gray */
+    z-index: 10;
+    box-shadow: 0 0 15px rgba(255, 170, 0, 0.1);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Style spécifique pour le bouton central (Publisher/Genre) */
+#game-center {
+    grid-area: center;
+    background: #9C7A11;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    /* Ta police de titre */
+    color: #000000;
+    border-width: 3px;
+    box-shadow: 0 0 20px rgba(255, 170, 0, 0.558);
+    min-height: 80px;
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#game-center:hover {
+    background: #ffaa00;
+    box-shadow: 0 0 30px rgba(255, 170, 0, 0.697);
+    transform: scale(1.02);
+}
+
+#game-center strong {
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+/* Conteneur SVG pour les courbes */
+.svgLines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: visible;
+}
+
+/* Style des courbes façon "Fibre Optique Gold" */
+.curve {
+    fill: none;
+    stroke: #ff6e26;
+    /* Ton Or principal */
+    stroke-linecap: round;
+    /* la forme des extrémités d’un trait (stroke) dans un SVG. */
+    opacity: 0.6;
+    /* Filtre pour donner un petit éclat néon aux lignes */
+    filter: drop-shadow(0 0 5px rgba(255, 170, 0, 0.5));
+    transition: stroke-width 0.5s ease;
+}
+
+/* Labels de marchés (NA, EU, JP, Other) */
+.box strong {
+    color: #ffffff;
+    display: block;
+    font-size: 19px;
+    margin-top: 5px;
+}
+
+/* Animation optionnelle pour faire vivre les lignes */
+.curve.growLine {
+    stroke-dasharray: 1000;
+    /* Définit le motif des tirets et des espaces */
+    stroke-dashoffset: 1000;
+    /* le début du trait le long de son chemin */
+    animation: drawPath 2s ease-out forwards;
+}
+
+@keyframes drawPath {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* On prépare l'état de départ (pour le délais progressif, lors du scroll*/
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Le délai sera injecté par le JS pour l'effet progressif */
+}
+
+/* Classe ajoutée par le JS quand l'élément est visible */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ------------------- VERSION SMARTPHONE ---------------- */
+
+@media screen and (max-width: 768px) {
+
+    /* --- CONFIGURATION DES TEXTES --- */
+    h1 {
+        font-size: 45px;
+        margin-top: 20px;
+        position: relative;
+        z-index: 2;
+        /* Force le texte à être devant */
+    }
+
+    .description,
+    .description2 {
+        font-size: 22px;
+        /* Écriture bien grosse comme demandé */
+        line-height: 1.6;
+        position: relative;
+        z-index: 2;
+        /* Passe devant les SVG */
+        background: rgba(5, 7, 10, 0.6);
+        /* Optionnel : léger fond sombre pour lire encore mieux */
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    /* --- CONFIGURATION DES SVG EN FOND --- */
+    .svg-container,
+    .svg-container2 {
+        position: fixed;
+        /* Ils restent à l'écran pendant le scroll */
+        z-index: 0;
+        /* Passe derrière tout le monde */
+        opacity: 0.3;
+        /* On les rend transparents pour ne pas masquer le texte */
+        pointer-events: none;
+        /* Empêche de cliquer dessus par erreur */
+    }
+
+    .svg-container {
+        width: 200px;
+        top: 10%;
+        left: -50px;
+        /* On le décale un peu vers la gauche pour le style */
+        transform: rotate(-10deg);
+    }
+
+    .svg-container2 {
+        width: 200px;
+        bottom: 10%;
+        right: -50px;
+        /* On le décale vers la droite */
+        top: auto;
+        /* Annule le top du mode ordi */
+        transform: rotate(10deg);
+    }
+
+    /* --- CORRECTION DES BLOCS --- */
+    .descriptiondeuxblocks {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        line-height: 1.6;
+        /* On répare le 72.1 ici aussi */
+    }
+
+    .container {
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+    /* --- ADAPTATION GRAPHIQUE AU THÈME GOLD --- */
+    .graphDyna {
+        display: grid;
+        gap: 100px;
+        grid-template-areas:
+            "na eu"
+            "center center"
+            "jp other";
+        max-width: 800px;
+        margin: 60px auto;
+        position: relative;
+        font-family: 'Rajdhani', sans-serif;
+    }
+
+    /* Style des boîtes calqué sur tes conteneurs Gold */
+    .box {
+        padding: 20px;
+        border: 2px solid #ffaa00;
+        /* Ta variable --neon-gold */
+        border-radius: 12px;
+        text-align: center;
+        background: rgba(5, 7, 10, 0.826);
+        /* Ton --dark-bg avec transparence */
+        color: #a3b1c2;
+        /* Ton --text-gray */
+        z-index: 10;
+        box-shadow: 0 0 15px rgba(255, 170, 0, 0.1);
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Style spécifique pour le bouton central (Publisher/Genre) */
+    #game-center {
+        grid-area: center;
+        background: #9C7A11;
+        cursor: pointer;
+        font-family: 'Orbitron', sans-serif;
+        /* Ta police de titre */
+        color: #000000;
+        border-width: 3px;
+        box-shadow: 0 0 20px rgba(255, 170, 0, 0.558);
+        min-height: 80px;
+        min-width: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #game-center:hover {
+        background: #ffaa00;
+        box-shadow: 0 0 30px rgba(255, 170, 0, 0.697);
+        transform: scale(1.02);
+    }
+
+    #game-center strong {
+        font-size: 22px;
+        letter-spacing: 2px;
+    }
+
+    /* Conteneur SVG pour les courbes */
+    .svgLines {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 5;
+        overflow: visible;
+    }
+
+    /* Style des courbes façon "Fibre Optique Gold" */
+    .curve {
+        fill: none;
+        stroke: #ff6e26;
+        /* Ton Or principal */
+        stroke-linecap: round;
+        opacity: 0.6;
+        /* Filtre pour donner un petit éclat néon aux lignes */
+        filter: drop-shadow(0 0 5px rgba(255, 170, 0, 0.5));
+        transition: stroke-width 0.5s ease;
+    }
+
+    /* Labels de marchés (NA, EU, JP, Other) */
+    .box strong {
+        color: #ffffff;
+        display: block;
+        font-size: 20px;
+        margin-top: 5px;
+    }
+
+    /* Animation optionnelle pour faire vivre les lignes */
+    .curve.growLine {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: drawPath 2s ease-out forwards;
+    }
+
+    @keyframes drawPath {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+}

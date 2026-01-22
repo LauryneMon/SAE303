@@ -1,0 +1,921 @@
+:root {
+    --cyan: #00f2ff;
+    --magenta: #ff00ea;
+    --neon-color: #00f2ff;
+    --neonColor: #00c331;
+    --neon-intensity: 15px;
+    --neonIntensity: 15px;
+    --terminal-green: #00ff41;
+    --screen-filter: none;
+    --screen-hue: 0deg;
+}
+
+/* Reset et fond de page */
+body {
+    /* La couleur de fond sombre */
+    background-color: #03080b;
+    /* Création de la grille avec deux dégradés (horizontal et vertical) */
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    /* Taille des carreaux de la grille */
+    background-size: 45px 45px;
+    /* Centrer le contenu */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+#taille {
+    font-size: 18px;
+}
+
+.nexus-terminal-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 30px;
+    margin-top: 75px;
+}
+
+.graphique1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.sidebar,
+.terminal-log {
+    width: 250px;
+    height: 400px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    padding: 15px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    /* Scroll si trop de texte */
+    font-size: 13px;
+    word-wrap: break-word;
+    /* Coupe les mots trop longs */
+}
+
+.sidebar {
+    color: white;
+    border: 1px solid var(--cyan);
+    box-shadow: 0 0 var(--neonIntensity) var(--neon-color), inset 0 0 20px rgba(0, 242, 255, 0.1);
+}
+
+.terminal-log {
+    border: 1px solid var(--terminal-green);
+    color: var(--terminal-green);
+    box-shadow: 0 0 var(--neonIntensity) var(--neonColor), inset 0 0 20px rgba(0, 255, 65, 0.1);
+    font-family: monospace;
+}
+
+h3 {
+    text-align: center;
+    font-size: 15px;
+    font-family: 'Orbitron';
+    color: var(--cyan);
+    border-bottom: 1px solid var(--cyan);
+    padding: 8px;
+    padding-bottom: 15px;
+}
+
+.modif {
+    color: var(--terminal-green);
+    border-bottom: 1px solid var(--terminal-green);
+}
+
+.systeme {
+    padding-bottom: 20px;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.systeme>span {
+    color: rgb(143, 178, 196);
+}
+
+.systeme2 {
+    font-size: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.systeme2>span {
+    font-weight: bold;
+}
+
+.monitor {
+    width: 820px;
+    height: 400px;
+    border: 3px solid var(--neon-color);
+    box-shadow: 0 0 var(--neon-intensity) var(--neon-color);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: linear-gradient(180deg, #000 0%, #0a0a1a 100%);
+}
+
+#centrerSVG {
+    align-items: center;
+}
+
+/* Zone de combat interne */
+.hud-area {
+    padding: 8px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.health-bar-bg {
+    width: 250px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 242, 255, 0.3);
+}
+
+.health-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--cyan);
+    transition: width 0.6s ease;
+}
+
+.separator-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+
+.arena {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 80px;
+    position: relative;
+}
+
+.fighter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.shout {
+    position: absolute;
+    top: -40px;
+    /* Position de départ au-dessus de la tête */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Orbitron', sans-serif;
+    color: #ff4444;
+    font-weight: bold;
+    font-size: 20px;
+    opacity: 0;
+    /* Invisible par défaut */
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* La classe déclenchée par JS */
+.active-shout {
+    animation: shoutAnimation 4s forwards;
+}
+
+@keyframes shoutAnimation {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0) scale(0.5);
+    }
+
+    15% {
+        opacity: 1;
+        transform: translate(-50%, -20px) scale(1.2) rotate(-5deg);
+    }
+
+    30% {
+        transform: translate(-52%, -25px) rotate(5deg);
+    }
+
+    45% {
+        transform: translate(-48%, -30px) rotate(-5deg);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -50px) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        /* Disparition progressive */
+        transform: translate(-50%, -70px) scale(0.8);
+    }
+}
+
+/* Retourner le personnage (si c'est le joueur de droite par exemple) */
+.p1-mirror {
+    transform: scaleX(-1);
+}
+
+/* Optionnel : faire sautiller le corps entier pour donner du poids au shoot */
+.fighter {
+    animation: body-bounce 1.5s infinite ease-in-out;
+}
+
+@keyframes body-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        transform: rotate(2deg);
+    }
+
+    50% {
+        transform: translateY(-5px);
+        transform: rotate(-2deg);
+    }
+}
+
+.p1-laser {
+    left: 180px;
+    background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+}
+
+.p2-laser {
+    right: 180px;
+    background: var(--magenta);
+    box-shadow: 0 0 12px var(--magenta);
+}
+
+.laser {
+    position: absolute;
+    height: 12px;
+    /* Un peu plus épais pour le feu */
+    background: linear-gradient(to right, rgba(255, 100, 0, 0), rgba(255, 200, 0, 0.8));
+    border-radius: 10px;
+    z-index: 5;
+    pointer-events: none;
+    transition: width 0.3s ease;
+}
+
+/* --- LA BOULE DE FEU (Côté Personnage) --- */
+.laser {
+    position: absolute;
+    height: 25px;
+    /* Plus épais pour l'effet boule */
+    border-radius: 15px 50px 25px 15px;
+    /* Tête ronde, queue plus fine */
+    z-index: 5;
+    pointer-events: none;
+    transition: width 3.3s ease;
+    /* L'effet de traînée lumineuse */
+    box-shadow: 0 0 20px rgba(255, 68, 0, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.4);
+    /* Animation de vibration du feu */
+    animation: firePulse 0.15s infinite alternate;
+}
+
+/* --- LE JOUEUR 1 (Feu Rouge/Orange) --- */
+.p1-laser {
+    margin-left: 30px;
+    background: linear-gradient(to right, #fff 0%, #ffcc00 10%, #ff4400 60%, transparent 100%);
+    /* On fixe l'origine à gauche pour le J1 */
+    left: 140px;
+}
+
+/* --- LE JOUEUR 2 (Feu Bleu/Cyan) --- */
+.p2-laser {
+    margin-right: 50px;
+    background: linear-gradient(to left, #fff 0%, #00ccff 20%, #0044ff 60%, transparent 100%);
+    border-radius: 50px 15px 15px 25px;
+    /* Inversé pour le J2 */
+    /* On fixe l'origine à droite pour le J2 */
+    right: 140px;
+    box-shadow: 0 0 20px rgba(0, 68, 255, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+/* --- ANIMATION DE PULSATION --- */
+@keyframes firePulse {
+    from {
+        transform: translateY(-50%) scaleY(0.9);
+        filter: brightness(1);
+    }
+
+    to {
+        transform: translateY(-50%) scaleY(1.1);
+        filter: brightness(1.3);
+    }
+}
+
+/* Desk Area centrée */
+.desk-area {
+    display: flex;
+    align-items: flex-end;
+    gap: 30px;
+    justify-content: center;
+    position: relative;
+    width: 1000px;
+    padding-bottom: 50px;
+}
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #111;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.key-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.key {
+    height: 38px;
+    min-width: 50px;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: var(--cyan);
+    font-family: 'Orbitron';
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-bottom: 3px solid #000;
+}
+
+.key.space {
+    width: 180px;
+    color: var(--magenta);
+}
+
+.key.mode {
+    min-width: 60px;
+    background: #414141;
+    border: 1px solid #ffcc00;
+    color: #ffffff;
+}
+
+.mouse-body {
+    width: 48px;
+    height: 75px;
+    background: #111;
+    border: 2px solid #444;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.mouse-body::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    width: 5px;
+    height: 10px;
+    background: var(--magenta);
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* --- CORRECTION DU SCROLL HORIZONTAL --- */
+.horizontal-slides_wrapper {
+    height: 400vh;
+    /* Définit la longueur du scroll (4 slides = 400vh) */
+    position: relative;
+    width: 100%;
+}
+
+.sticky-box {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    /* Empêche le scroll natif à l'intérieur */
+    display: flex;
+    align-items: center;
+}
+
+.horizontal-slides_inner {
+    display: flex;
+    width: max-content;
+    /* S'adapte à la largeur des slides */
+    will-change: transform;
+}
+
+.slide {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.slide h2 {
+    font-size: 80px;
+    font-family: 'Orbitron';
+    color: var(--cyan);
+    margin: 0;
+}
+
+.section1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+}
+
+/* -------------------SECTION 2 ---------------- */
+.container {
+    max-width: 700px;
+    padding: 20px;
+}
+
+/* Titre "Chapitre I" */
+.chapitre {
+    font-family: 'Orbitron', sans-serif;
+    color: #00f2ff;
+    letter-spacing: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Titre Principal avec effet de lueur */
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 64px;
+    margin: 0;
+    line-height: 1.1;
+    color: #ffffff;
+    text-shadow: 0 0 50px rgba(0, 242, 255, 0.7), 0 0 50px rgba(0, 242, 255, 0.5);
+}
+
+/* Ligne de séparation */
+.soulignagne {
+    width: 100%;
+    max-width: 800px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00f2ff, transparent);
+    margin: 25px 0;
+    box-shadow: 0 0 15px #00f2ff;
+}
+
+/* Texte de description */
+.description {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #a3b1c2;
+    font-weight: 300;
+}
+
+/* Les trois points lumineux */
+.points {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+    justify-content: center;
+    text-align: center;
+}
+
+.points span {
+    width: 8px;
+    height: 8px;
+    background-color: var(--neon-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--neon-color);
+    animation: pulse 2s infinite ease-in-out;
+}
+
+/* Animation de pulsation pour les points */
+.points span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.points span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.conteneur-image {
+    position: relative;
+    display: inline-block;
+    box-shadow: 0 0 var(--neonIntensity) var(--cyan);
+    /* Une ombre interne épaisse de la couleur du fond*/
+}
+
+.slide2 {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.RevenirAccueil {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 2000;
+    background: #637d93;
+    color: #fff;
+    border: none;
+    padding: 6px 8px;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.RevenirAccueil:hover {
+    background: #4b5e6f;
+}
+
+button {
+    padding: 15px 25px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+#hp1,
+#hp2 {
+    height: 100%;
+    display: block;
+    transition: width 0.4s ease-out;
+}
+
+.hp-container {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+
+.shout {
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.hp-fill {
+    height: 100%;
+    width: 0%;
+    /* Piloté par JS */
+    background: var(--cyan);
+    transition: width 0.5s ease;
+}
+
+.hp-fill.highlight {
+    background: var(--magenta);
+}
+
+.character-svg {
+    width: 80px;
+    /* Taille de base */
+    height: 150px;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.label {
+    font-size: 16px;
+    font-family: 'Orbitron';
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+}
+
+#tooltip {
+    position: absolute;
+    display: none;
+    /* Caché par défaut, activé par le JS */
+    pointer-events: none;
+    /* La souris passe à travers pour ne pas clignoter */
+    background-color: rgba(20, 20, 20, 0.9);
+    color: #ffffff;
+    padding: 12px;
+    border: 2px solid #00f2ff;
+    /* Couleur néon pour coller à l'arène */
+    border-radius: 8px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 13px;
+    z-index: 10000;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+    line-height: 1.5;
+    min-width: 180px;
+}
+
+.character-svg {
+    /* Transition fluide pour le changement de taille (HP) et le zoom (Survol) */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* On s'assure que le zoom se fait depuis le bas (le sol de l'arène) */
+    transform-origin: bottom center;
+    /* Indispensable pour que le filtre de l'arène ne coupe pas le perso */
+    overflow: visible !important;
+}
+
+/* Optionnel : changer le curseur quand on survole un élément interactif */
+#hp1,
+#hp2,
+#l1,
+#l2,
+.character-svg {
+    cursor: help;
+}
+
+/* On prépare l'état de départ (pour le délais progressif, lors du scroll*/
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Le délai sera injecté par le JS pour l'effet progressif */
+}
+
+/* Classe ajoutée par le JS quand l'élément est visible */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* RESPONSIVE 768 PX */
+
+@media screen and (max-width: 768px) {
+
+    /* Wrapper principal : scroll vertical uniquement */
+    .horizontal-slides_wrapper {
+        height: auto;
+        /* ajusté au contenu */
+        overflow-x: hidden;
+        /* empêche le scroll horizontal */
+        overflow-y: auto;
+        /* scroll vertical */
+    }
+
+    /* Sticky box : plus de scroll horizontal */
+    .sticky-box {
+        position: relative;
+        /* plus sticky pour mobile */
+        top: auto;
+        height: auto;
+        width: 100%;
+        overflow-x: hidden;
+        /* plus de scroll horizontal */
+        overflow-y: visible;
+        display: block;
+        align-items: unset;
+    }
+
+    /* Slides : prennent toute la largeur mais restent verticales */
+    .horizontal-slides_inner {
+        display: block;
+        /* empile les slides verticalement */
+        width: 100%;
+    }
+
+    .slide,
+    .slide2 {
+        width: 100%;
+        height: auto;
+        /* s’adapte au contenu */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-right: none;
+        /* plus de séparation horizontale */
+        margin-bottom: 40px;
+        /* espacement entre les slides */
+    }
+
+    .slide h2 {
+        font-size: 48px;
+        /* taille réduite pour mobile */
+    }
+
+    .section1 {
+        margin-top: 50px;
+        /* espacement réduit pour mobile */
+        justify-content: center;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    /* Conteneurs et graphiques adaptés */
+    .graphique1,
+    .graphRes,
+    .graphRespon {
+        display: block;
+        width: 100%;
+    }
+
+    .graphique1 {
+        display: grid;
+        /* Espace entre les boutons */
+
+        /* Définition de la grille : 2 colonnes */
+        grid-template-areas:
+            "un trois"
+            "deux deux";
+    }
+
+    .item1 {
+        grid-area: un;
+    }
+
+    .item3 {
+        grid-area: trois;
+    }
+
+    .item2 {
+        grid-area: deux;
+        text-align: center;
+    }
+
+    .graphRes {
+        display: grid;
+        /* Espace entre les boutons */
+
+        /* Définition de la grille : 2 colonnes */
+        grid-template-areas:
+            "cinq cinq"
+            "quatre six";
+    }
+
+    .item4 {
+        grid-area: quatre;
+    }
+
+    .item5 {
+        grid-area: cinq;
+    }
+
+    .item6 {
+        grid-area: six;
+    }
+
+    .graphRespon {
+        display: grid;
+        /* Espace entre les boutons */
+
+        /* Définition de la grille : 2 colonnes */
+        grid-template-areas:
+            "huit huit"
+            "sept neuf";
+    }
+
+    .item7 {
+        grid-area: sept;
+    }
+
+    /* #taille {
+        font-size: 20px;
+    } */
+
+    .item8 {
+        grid-area: huit;
+        text-align: center;
+    }
+
+    .item9 {
+        grid-area: neuf;
+    }
+
+    #centrerSVG {
+        align-items: center;
+        width: 500px;
+    }
+
+    #centrerSVG>svg {
+        align-items: center;
+        width: 450px;
+    }
+
+    /* Sidebar et terminal : s’adaptent à l’écran */
+
+    .sidebar,
+    .terminal-log {
+        width: 250px;
+        height: 300px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 8px;
+        padding: 15px;
+        box-sizing: border-box;
+        overflow-y: auto;
+        /* Scroll si trop de texte */
+        font-size: 13px;
+        word-wrap: break-word;
+        /* Coupe les mots trop longs */
+    }
+
+    .sidebar {
+        color: white;
+        border: 1px solid var(--cyan);
+        box-shadow: 0 0 var(--neonIntensity) var(--neon-color), inset 0 0 20px rgba(0, 242, 255, 0.1);
+    }
+
+    .terminal-log {
+        border: 1px solid var(--terminal-green);
+        color: var(--terminal-green);
+        box-shadow: 0 0 var(--neonIntensity) var(--neonColor), inset 0 0 20px rgba(0, 255, 65, 0.1);
+        font-family: monospace;
+    }
+
+    /* Monitor / arène */
+    .monitor {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        flex-direction: column;
+        margin-top: 20px
+    }
+
+    .fighter {
+        margin-bottom: 20px;
+    }
+
+    /* Keyboard / mouse / desk */
+    .desk-area {
+        align-items: center;
+        width: 50%;
+        padding-bottom: 30px;
+    }
+
+    .keyboard {
+        width: 90%;
+    }
+
+    .mouse-body {
+        margin-top: 20px;
+    }
+
+    /* Ajustements pour textes et titres */
+    h1 {
+        font-size: 45px;
+        line-height: 1.2;
+    }
+
+    .chapitre {
+        font-size: 16px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .description {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+    .points {
+        gap: 8px;
+    }
+
+    .points span {
+        width: 6px;
+        height: 6px;
+    }
+
+    /* Images et conteneurs flottants */
+    .conteneur-image {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+}

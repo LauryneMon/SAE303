@@ -1,0 +1,291 @@
+:root {
+    --neon-pink: #ff007f;
+    --pink-glow: rgba(255, 0, 127, 0.7);
+    --bg-dark: #050505;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #020609;
+    background-image:
+        linear-gradient(to right, rgba(255, 93, 161, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+/* ------------------- SECTION 1 ---------------- */
+.section1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.container {
+    max-width: 900px;
+    padding: 20px;
+}
+
+.chapitre {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-pink);
+    letter-spacing: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 64px;
+    margin: 0;
+    line-height: 1.1;
+    color: #ffffff;
+    text-shadow: 0 0 30px var(--pink-glow);
+}
+
+.soulignagne {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
+    margin: 25px 0;
+    box-shadow: 0 0 15px var(--neon-pink);
+}
+
+.description {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #d1d1d1;
+    font-weight: 300;
+}
+
+/* Points */
+.points {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.points span {
+    width: 8px;
+    height: 8px;
+    background-color: var(--neon-pink);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--neon-pink);
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.points span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.points span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+.pulse-icon{
+    color: var(--neon-pink);
+}
+/* ------------------- INTERFACE SONORE ---------------- */
+.audio-interface {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0 100px;
+    gap: 20px;
+}
+
+.sonar-box {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 55px;
+}
+
+.data-counter {
+    position: absolute;
+    top: -40px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 64px;
+    color: white;
+    text-shadow: 0 0 20px var(--neon-pink);
+    z-index: 10;
+}
+
+.sonar-wave {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 4px solid var(--neon-pink);
+    border-radius: 50%;
+    box-shadow: 0 0 30px var(--pink-glow);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.decade-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
+    color: var(--neon-pink);
+    z-index: 10;
+    background: #020609;
+    padding: 5px 15px;
+}
+
+.pink-button {
+    margin-top: 40px;
+    padding: 15px 40px;
+    border: 2px solid var(--neon-pink);
+    background: transparent;
+    color: var(--neon-pink);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 0 10px var(--pink-glow);
+}
+
+.pink-button:hover {
+    background: var(--neon-pink);
+    color: white;
+    transform: scale(1.05);
+}
+
+/* ------------------- AUTRES ---------------- */
+.RevenirAccueil {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 2000;
+    background: #ff82c1;
+    color: #fff;
+    border: none;
+    padding: 6px 8px;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.RevenirAccueil:hover {
+    background: #6f4b60;
+    transform: scale(1.1);
+}
+
+.instructionSon {
+    max-width: 600px;
+    margin: 20px auto 40px;
+    padding: 15px 25px;
+    border-left: 3px solid var(--neon-pink);
+    background: rgba(255, 0, 127, 0.05);
+}
+
+/* On prépare l'état de départ (pour le délais progressif, lors du scroll*/
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Le délai sera injecté par le JS pour l'effet progressif */
+}
+
+/* Classe ajoutée par le JS quand l'élément est visible */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ------------------- RESPONSIVE MOBILE ---------------- */
+
+@media screen and (max-width: 768px) {
+
+    /* Ajustement de la section principale */
+    .section1 {
+        margin-top: 30px;
+        padding: 0 15px;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    /* Réduction des titres pour qu'ils ne sortent pas de l'écran */
+    h1 {
+        font-size: 36px;
+        /* Réduit de 64px à 36px */
+        letter-spacing: 1px;
+    }
+
+    .chapitre {
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
+
+    .description {
+        font-size: 20px;
+        /* Plus lisible sur téléphone */
+        line-height: 1.4;
+    }
+
+    /* Ajustement de l'interface sonore */
+    .audio-interface {
+        padding: 30px 0 60px;
+    }
+
+    /* On réduit la taille du sonar pour les petits écrans */
+    .sonar-box {
+        width: 280px;
+        height: 280px;
+    }
+
+    .data-counter {
+        font-size: 40px;
+        top: -30px;
+    }
+
+    .decade-text {
+        font-size: 18px;
+    }
+
+    /* Bouton et instructions */
+    .pink-button {
+        width: 90%;
+        /* Bouton plus large pour cliquer facilement avec le pouce */
+        padding: 15px 20px;
+    }
+
+    .instructionSon {
+        margin: 20px 15px;
+        font-size: 14px;
+    }
+
+    /* Bouton retour accueil (ajustement position) */
+    .RevenirAccueil {
+        top: 10px;
+        left: 10px;
+        padding: 8px 12px;
+    }
+}

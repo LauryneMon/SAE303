@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Arena - Welcome</title>
+    <link rel="stylesheet" href="styles/pageAccueil.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<!-- ---------Page d'Accueil------------ -->
+
+<body>
+
+    <!-- Création SVG qui contient quelques lignes horizontales et verticales positionnées exactement sur la grille de 40px. -->
+    <svg class="grid-animation" preserveAspectRatio="none" viewBox="0 0 1000 1000">
+        <line class="flux h-line" x1="0" y1="200" x2="1000" y2="200" />
+        <line class="flux h-line" x1="0" y1="840" x2="1000" y2="840" />
+
+        <line class="flux v-line" x1="240" y1="0" x2="240" y2="1000" />
+        <line class="flux v-line" x1="760" y1="0" x2="760" y2="1000" />
+
+        <line class="flux d-line" x1="0" y1="0" x2="1000" y2="1000" />
+        <line class="flux d-line" x1="1000" y1="0" x2="0" y2="1000" />
+    </svg>
+
+    <section>
+        <div class="chargement">
+            <div class="bienvenue">[ BIENVENUE DANS ]</div>
+            <h1 class="main-title">
+                <!-- TITRE -->
+                <span class="white">NEXUS</span> <span class="cyan">ARENA</span>
+            </h1>
+
+            <div class="titreDessus">
+                <div class="description">Une exploration interactive de l'histoire du jeu vidéo à travers les âges.
+                </div>
+
+                <!-- Boutons pour atteindre les 3 différentes pages -->
+                <div class="menu-nav">
+                    <a href="Vortex.html"><button class="menu-btn"> <span>VORTEX</span> </button>
+                    </a>
+                    <a href="Genesis.html"><button class="menu-btn"><span>GENESIS</span></button></a>
+                    <a href="Decibel.html"><button class="menu-btn"><span>DECIBEL</span></button></a>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+   
+</body>
+
+</html>
